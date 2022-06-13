@@ -12,9 +12,13 @@ public class CharacterMovement : MonoBehaviour
     private float upSpeed, downSpeed, sideSpeed;
 
     [SerializeField] CharacterMode initialMode;
+    [SerializeField] Transform spawnPosition;
+
+    public CharacterMode CharacterMode => characterMode;
 
     private void Start()
     {
+        transform.position = spawnPosition.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
         sideSpeed = 10;
@@ -98,6 +102,12 @@ public class CharacterMovement : MonoBehaviour
                 downSpeed = 1;
                 break;
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Game lost");
+        transform.position = spawnPosition.position;
     }
 }
 
