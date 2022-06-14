@@ -7,8 +7,10 @@ public class Inventory : MonoBehaviour
 {
     private int totalPoints;
     private CharacterMovement characterLogic;
+    private bool cogCollected, mapCollected, keyCollected;
 
     [SerializeField] private int bluePowerUps, redPowerUps, blackPowerUps, whitePowerUps;
+    [SerializeField] private GameObject mapIcon, cogIcon, keyIcon;
 
     public Action<int> OnChangedBluePU, OnChangedRedPU, OnChangedBlackPU, OnChangedWhitePU;
     public Action<int> OnChangedPoints;
@@ -88,5 +90,28 @@ public class Inventory : MonoBehaviour
                 OnChangedBluePU?.Invoke(bluePowerUps);
                 break;
         }
+    }
+
+    public void CollectMap()
+    {
+        mapCollected = true;
+        mapIcon.SetActive(true);
+    }
+
+    public void CollectCog()
+    {
+        cogCollected = true;
+        cogIcon.SetActive(true);
+    }
+
+    public void CollectKey()
+    {
+        keyCollected = true;
+        keyIcon.SetActive(true);
+    }
+
+    public bool HasKey()
+    {
+        return keyCollected;
     }
 }
