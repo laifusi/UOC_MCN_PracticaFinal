@@ -72,7 +72,7 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void ChangeMode(CharacterMode mode)
+    public void ChangeMode(CharacterMode mode)
     {
         characterMode = mode;
         switch(mode)
