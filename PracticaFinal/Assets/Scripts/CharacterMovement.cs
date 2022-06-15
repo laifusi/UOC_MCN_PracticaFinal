@@ -114,6 +114,20 @@ public class CharacterMovement : MonoBehaviour
         Debug.Log("Game lost");
         transform.position = spawnPosition.position;
     }
+
+    public void EndGame()
+    {
+        if(GetComponent<Inventory>().HasCog())
+        {
+            Debug.Log("Game won!");
+        }
+        else
+        {
+            Debug.Log("Game incomplete");
+        }
+
+        transform.position = spawnPosition.position;
+    }
 }
 
 public enum Side

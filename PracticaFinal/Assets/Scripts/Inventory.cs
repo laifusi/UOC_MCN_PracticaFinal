@@ -114,4 +114,9 @@ public class Inventory : MonoBehaviour
     {
         return keyCollected;
     }
+
+    public bool HasCog()
+    {
+        return cogCollected;
+    }
 }
