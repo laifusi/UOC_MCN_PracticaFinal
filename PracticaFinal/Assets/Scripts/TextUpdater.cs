@@ -5,14 +5,13 @@ using UnityEngine.UI;
 
 public class TextUpdater : MonoBehaviour
 {
-    private Inventory inventory;
+    [SerializeField] private Inventory inventory;
     private Text text;
 
     [SerializeField] private TypeOfCollectible collectibleType;
 
-    private void Start()
+    private void Awake()
     {
-        inventory = FindObjectOfType<Inventory>();
         text = GetComponent<Text>();
 
         switch(collectibleType)
