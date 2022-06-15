@@ -104,6 +104,11 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    public void MoveTo(Transform point)
+    {
+        transform.position = point.position;
+    }
+
     public void Die()
     {
         Debug.Log("Game lost");
