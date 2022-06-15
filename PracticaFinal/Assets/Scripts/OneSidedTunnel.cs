@@ -25,19 +25,19 @@ public class OneSidedTunnel : MonoBehaviour
             switch(enterSide)
             {
                 case Side.Bottom:
-                    if (Input.GetAxis("VerticalMovement") < 0)
-                        character.MoveTo(exitPoint);
-                    break;
-                case Side.Top:
                     if (Input.GetAxis("VerticalMovement") > 0)
                         character.MoveTo(exitPoint);
                     break;
+                case Side.Top:
+                    if (Input.GetAxis("VerticalMovement") < 0)
+                        character.MoveTo(exitPoint);
+                    break;
                 case Side.Left:
-                    if (Input.GetAxis("HorizontalMovement") < 0)
+                    if (Input.GetAxis("HorizontalMovement") > 0)
                         character.MoveTo(exitPoint);
                     break;
                 case Side.Right:
-                    if (Input.GetAxis("HorizontalMovement") > 0)
+                    if (Input.GetAxis("HorizontalMovement") < 0)
                         character.MoveTo(exitPoint);
                     break;
             }

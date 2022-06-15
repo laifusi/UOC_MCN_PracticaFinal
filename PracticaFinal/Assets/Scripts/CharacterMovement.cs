@@ -7,6 +7,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterMode characterMode;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidbody2D;
+    private Inventory inventory;
     private float horizontalMovement;
     private float verticalMovement;
     private float upSpeed, downSpeed, sideSpeed;
@@ -18,28 +19,35 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-        transform.position = spawnPosition.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        inventory = GetComponent<Inventory>();
         sideSpeed = 10;
+        InitializeCharacter();
+    }
+
+    private void InitializeCharacter()
+    {
         ChangeMode(initialMode);
+        inventory.AddModePowerUp(initialMode);
+        transform.position = spawnPosition.position;
     }
 
     private void Update()
     {
-        if(Input.GetAxis("VerticalModeChange") > 0)
+        if(Input.GetButtonDown("UpMode"))
         {
             ChangeMode(Side.Top);
         }
-        else if(Input.GetAxis("VerticalModeChange") < 0)
+        else if(Input.GetButtonDown("DownMode"))
         {
             ChangeMode(Side.Bottom);
         }
-        else if(Input.GetAxis("HorizontalModeChange") > 0)
+        else if(Input.GetButtonDown("RightMode"))
         {
             ChangeMode(Side.Right);
         }
-        else if(Input.GetAxis("HorizontalModeChange") < 0)
+        else if(Input.GetButtonDown("LeftMode"))
         {
             ChangeMode(Side.Left);
         }
@@ -75,7 +83,8 @@ public class CharacterMovement : MonoBehaviour
     public void ChangeMode(CharacterMode mode)
     {
         characterMode = mode;
-        switch(mode)
+        inventory.UseModePowerUp(mode);
+        switch (mode)
         {
             case CharacterMode.RubberBall:
                 spriteRenderer.color = Color.red;
@@ -112,12 +121,12 @@ public class CharacterMovement : MonoBehaviour
     public void Die()
     {
         Debug.Log("Game lost");
-        transform.position = spawnPosition.position;
+        InitializeCharacter();
     }
 
     public void EndGame()
     {
-        if(GetComponent<Inventory>().HasCog())
+        if(inventory.HasCog())
         {
             Debug.Log("Game won!");
         }
@@ -126,7 +135,7 @@ public class CharacterMovement : MonoBehaviour
             Debug.Log("Game incomplete");
         }
 
-        transform.position = spawnPosition.position;
+        InitializeCharacter();
     }
 }
 

@@ -18,6 +18,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         characterLogic = GetComponent<CharacterMovement>();
+
+        OnChangedBluePU?.Invoke(bluePowerUps);
+        OnChangedBlackPU?.Invoke(blackPowerUps);
+        OnChangedWhitePU?.Invoke(whitePowerUps);
+        OnChangedRedPU?.Invoke(redPowerUps);
     }
 
     public void AddPoints(int points)
